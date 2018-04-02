@@ -1,6 +1,12 @@
 # 3dbpconv
 
 ## Training configuration
+tensorflow 1.1.0
+2 GPUs (TITAN X pascal arch.)
+MacOS X 10.12.6
+Python 2.7.12
+
+### illustration
 ![alt tag](https://github.com/panakino/3dbpconv/blob/master/structure.png)
 
 ## command to train and deploy
