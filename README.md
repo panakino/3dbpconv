@@ -19,7 +19,7 @@ Whole codes are forked from https://github.com/jakeret/tf_unet.
 ## Commands
 Before starting,
 ```bash
-pip install pillow matplotlib
+pip install pillow matplotlib h5py
 ```
 
 To start training a model for 3D BPConvNet:
