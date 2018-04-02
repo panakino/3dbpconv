@@ -41,8 +41,6 @@ from tf_unet.layers import (weight_variable, weight_variable_devonc, bias_variab
                             conv3d, deconv3d, max_pool, crop_and_concat, pixel_wise_softmax_2,
                             cross_entropy,euclidean_loss,fft3d_b01c,ifft3d_b01c,fftshift_b01c)
 
-from ref_layers import create_conv_net_complex
-
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 
 def create_conv_net(x, keep_prob, channels, n_class,reuse=None, layers=3, features_root=8, filter_size=3, pool_size=2, summaries=True):
@@ -433,7 +431,7 @@ class Trainer(object):
         self.summary_op = tf.summary.merge_all()
         init = tf.global_variables_initializer()
 
-        #prediction_path = os.path.abspath(self.prediction_path)
+        prediction_path = os.path.abspath(self.prediction_path)
         output_path = os.path.abspath(output_path)
 
         if not restore:
