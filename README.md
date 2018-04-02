@@ -3,10 +3,10 @@
 3D parallel MRI reconstruction for accelerated MRI. In our paper (to be appeared), we reconstructed 320x320x256x8 volume using 3D BPConvNet. It takes sub 10 seconds. We used Knee dataset from http://mridata.org
 
 ## Training configuration
-tensorflow 1.1.0
-2 GPUs (TITAN X pascal arch.)
-MacOS X 10.12.6
-Python 2.7.12
+* tensorflow 1.1.0
+* 2 GPUs (TITAN X pascal arch.)
+* MacOS X 10.12.6
+* Python 2.7.12
 
 ### illustration
 ![alt tag](https://github.com/panakino/3dbpconv/blob/master/structure.png)
