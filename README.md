@@ -10,6 +10,7 @@ Whole codes are forked from https://github.com/jakeret/tf_unet.
 * MacOS X 10.12.6
 * Python 2.7.12
 *  We used Knee dataset from http://mridata.org. 
+* 17 subj for training (x8 with augmentation)/ 3 subj for testing
 
 ### illustration
 ![alt tag](https://github.com/panakino/3dbpconv/blob/master/structure.png)
