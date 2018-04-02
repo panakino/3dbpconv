@@ -9,8 +9,9 @@ Whole codes are forked from https://github.com/jakeret/tf_unet.
 * 2 GPUs (TITAN X pascal arch.)
 * MacOS X 10.12.6
 * Python 2.7.12
-*  We used Knee dataset from http://mridata.org. 
+* We used Knee dataset from http://mridata.org. 
 * 17 subj for training (x8 with augmentation)/ 3 subj for testing
+* Data format : NCXYZ (batch x channel x X x Y x Z)
 
 ### illustration
 ![alt tag](https://github.com/panakino/3dbpconv/blob/master/structure.png)
