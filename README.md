@@ -1,7 +1,7 @@
 # 3dbpconv
 
 # Training configuration
-(https://github.com/panakino/3dbpconv/structure.png)
+https://github.com/panakino/3dbpconv/blob/master/structure.png
 
 To start training a model for 3D BPConvNet:
 ```bash
