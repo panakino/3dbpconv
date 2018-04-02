@@ -1,6 +1,6 @@
 # 3D BPConvNet
 
-3D parallel MRI reconstruction for accelerated MRI. In our paper (to be appeared), we reconstructed 320x320x256x8 volume using 3D BPConvNet. It takes sub 10 seconds.
+3D parallel MRI reconstruction for accelerated MRI. In our paper (to be appeared), we reconstructed 320x320x256x8 volume using 3D BPConvNet. It takes sub 10 seconds. We used Knee dataset from http://mridata.org
 
 ## Training configuration
 tensorflow 1.1.0
