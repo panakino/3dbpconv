@@ -16,6 +16,11 @@ Whole codes are forked from https://github.com/jakeret/tf_unet.
 ![alt tag](https://github.com/panakino/3dbpconv/blob/master/structure.png)
 
 ## Commands
+Before starting,
+```bash
+pip install pillow matplotlib
+```
+
 To start training a model for 3D BPConvNet:
 ```bash
 python main.py --lr=1e-4 --output_path='logs/' --data_path='data_path/*.h5' --test_path='test_path/*.h5' --features_root=32 --layers=5 --is_training=True
