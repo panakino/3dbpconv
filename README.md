@@ -1,6 +1,6 @@
 # 3D BPConvNet
 
-3D parallel MRI reconstruction for accelerated MRI. In our paper (to be appeared), we reconstructed 320x320x256x8 volume using 3D BPConvNet. It takes sub 10 seconds. We used Knee dataset from http://mridata.org. We also used wavelet transform from built-in of Matlab 2016, however, in this repo, we do not provide wavelet transform. The codes only cover the part network.
+3D parallel MRI reconstruction for accelerated MRI. In our paper (to be appeared), we reconstructed 320x320x256x8 volume using 3D BPConvNet. It takes sub 10 seconds. We also used wavelet transform from built-in of Matlab 2016, however, in this repo, we do not provide wavelet transform. The codes only cover the part network.
 
 Whole codes are forked from https://github.com/jakeret/tf_unet.
 
@@ -9,6 +9,7 @@ Whole codes are forked from https://github.com/jakeret/tf_unet.
 * 2 GPUs (TITAN X pascal arch.)
 * MacOS X 10.12.6
 * Python 2.7.12
+*  We used Knee dataset from http://mridata.org. 
 
 ### illustration
 ![alt tag](https://github.com/panakino/3dbpconv/blob/master/structure.png)
