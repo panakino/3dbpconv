@@ -49,7 +49,7 @@ if __name__ =='__main__':
     data_provider=image_util.ImageDataProvider_hdf5_vol(conf.data_path,conf.channels)
     data_provider_test=image_util.ImageDataProvider_hdf5_vol(conf.test_path,conf.channels,test=True)
 
-    net=unet.Unet(layers=conf.layers,size_mask=[256//2,320//2,320//2],features_root=conf.features_root,channels=conf.channels, n_class=conf.channels,filter_size=3, cost='psnr')
+    net=unet.Unet(layers=conf.layers,size_mask=[256//2,320//2,320//2],features_root=conf.features_root,channels=conf.channels, n_class=conf.channels,filter_size=3, cost='cross_entropy')
     if conf.is_training:
         #setup & trainig
         if conf.optimizer=='adam':
