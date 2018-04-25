@@ -63,6 +63,7 @@ def create_conv_net(x, keep_prob, channels, n_class,reuse=None, layers=3, featur
                                                                                                            filter_size=filter_size,
                                                                                                            pool_size=pool_size))
 
+    num_hidden_unit=1024
     x_shp = [_s if _s is not None else -1 for _s in x.get_shape().as_list()]
     nx = x_shp[1]
     ny = x_shp[2]
@@ -88,7 +89,7 @@ def create_conv_net(x, keep_prob, channels, n_class,reuse=None, layers=3, featur
     size = in_size
     print("initial size", in_node.get_shape())
     # down layers
-    with tf.device('/gpu:1'),tf.variable_scope("convdown",reuse=reuse):
+    with tf.variable_scope("convdown",reuse=reuse):
         for layer in range(0, layers):
             with tf.variable_scope("level" + str(layer),reuse=reuse):
                 features = 2**layer*features_root
@@ -130,53 +131,12 @@ def create_conv_net(x, keep_prob, channels, n_class,reuse=None, layers=3, featur
 
 
         in_node = dw_h_convs_r[layers-1]
+        output_map= tf.layers.dense(in_node, num_hidden_unit)
 
-    print("output size-last layer", (in_node.get_shape()))
-    # up layers
-    with tf.device('/gpu:0'), tf.variable_scope("convup",reuse=reuse):
-        for layer in range(layers-2, -1, -1):
-            with tf.variable_scope("level" + str(layer),reuse=reuse):
-                features = 2**(layer+1)*features_root
-                stddev = np.sqrt(2 / (filter_size**2 * features))
+    out_val = tf.layers.dense(output_map, 1)
 
-                with tf.variable_scope("real_deconv",reuse=reuse):
-                    wdr = weight_variable_devonc([pool_size, pool_size, pool_size, features//2, features], stddev)
-                    bdr = bias_variable([features//2],0.0)
-                print("before size up", in_node.get_shape())
-                o_size=in_node.get_shape()
+    print("output size-final", output_map.get_shape())
 
-                #conv_real = deconv3d(in_node_real, wdr, pool_size, o_size,batchN)-deconv3d(in_node_imag,wdi,pool_size,o_size,batchN)
-                conv_real = deconv3d(in_node, wdr, pool_size, o_size,1)
-                conv_real = tf.nn.relu(conv_real + bdr)
-
-                print("output size-conv up", conv_real.get_shape())
-                #conv_real = crop_and_concat(dw_h_convs_r[layer], conv_real)
-                conv_real=conv_real+dw_h_convs_r[layer]
-                print("output size-crop_and_concat", conv_real.get_shape())
-
-                with tf.variable_scope("real_conv",reuse=reuse):
-                    wr = weight_variable([filter_size, filter_size, filter_size, conv_real.shape[4], features//2], stddev)
-                    br = bias_variable([features//2],0.0)
-
-                in_node= conv3d(conv_real, wr, keep_prob,1)
-                in_node= tf.nn.relu(in_node+br)
-
-                size *= 2
-                size -= 4
-
-
-    with tf.device('/gpu:1'),tf.variable_scope("last_unet",reuse=reuse):
-        with tf.variable_scope("real",reuse=reuse):
-            wr = weight_variable([1, 1,1, features_root, n_class], stddev)
-            br = bias_variable([n_class])
-
-            conv_real = conv3d(in_node, wr, keep_prob,1)
-            in_node=conv_real+br
-
-    print("output size-final", conv_real.get_shape())
-    output_map = in_node+x_image
-
-    #output = output * self.ksp_m_inv + layer * self.ksp_m
 
     #if summaries:
     #for i, (c1, c2) in enumerate(convs):
@@ -195,7 +155,7 @@ def create_conv_net(x, keep_prob, channels, n_class,reuse=None, layers=3, featur
     #for k in up_h_convs.keys():
     #    tf.summary.histogram("up_convolution_%s"%k + '/activations', up_h_convs[k])
 
-    return output_map, int(in_size - size)
+    return out_val, int(in_size - size)
 
 
 class Unet(object):
